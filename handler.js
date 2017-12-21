@@ -11,7 +11,8 @@ export const main = async (event, context, callback) => {
   try {
     const destPath = await download(bucket, key)
     console.log(`destpath is: ${destPath}`)
-    await ffprobe(destPath)
+    const result = await ffprobe(destPath)
+    console.log(result)
   } catch (error) {
     callback(error)
   }
