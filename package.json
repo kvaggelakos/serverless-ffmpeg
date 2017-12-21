@@ -1,0 +1,25 @@
+{
+  "name": "ffmpeg-serverless",
+  "version": "1.0.0",
+  "description": "Run ffmpeg serverless!",
+  "dependencies": {
+    "aws-sdk": "^2.173.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "serverless-webpack": "^4.2.0",
+    "webpack": "^3.10.0"
+  },
+  "scripts": {
+    "offline": "sls offline start",
+    "deploy": "serverless deploy function -f ffmpeg",
+    "create-stack": "sls deploy -v",
+    "logs": "sls logs -f ffmpeg -t",
+    "destroy-stack": "sls remove -v",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kostas Vaggelakos <kostas@vaggelakos.com>",
+  "license": "ISC"
+}
