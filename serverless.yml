@@ -101,9 +101,6 @@ functions:
       - s3:
           bucket: ${self:custom.source_bucket} # This will create the source bucket
           event: s3:ObjectCreated:*
-      - s3:
-          bucket: ${self:custom.source_bucket} # This will create the source bucket
-          event: s3:ObjectRemoved:*
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
