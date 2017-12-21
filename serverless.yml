@@ -13,22 +13,61 @@
 
 service: ffmpeg-serverless
 
-
 custom:
   source_bucket: speechkit-ffmpeg-sources
   destination_bucket: speechkit-ffmpeg-destination
+  remover:
+     buckets:
+       - ${self:custom.source_bucket}
+       - ${self:custom.destination_bucket}
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+plugins:
+  - serverless-webpack
+  - serverless-s3-remover
+
+
 provider:
   name: aws
   runtime: nodejs6.10
+  timeout: 300
+  environment:
+    DESTINATION_BUCKET: ${self:custom.destination_bucket}
+  iamRoleStatements:
+    # List buckets
+    - Effect: Allow
+      Action:
+        - s3:ListBucket
+      Resource:
+        - Fn::Join:
+          - ""
+          - - "arn:aws:s3:::"
+            - ${self:custom.source_bucket}
+        - Fn::Join:
+          - ""
+          - - "arn:aws:s3:::"
+            - ${self:custom.destination_bucket}
+    # Operate in buckets
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+        - s3:DeleteObject
+      Resource:
+        - Fn::Join:
+          - ""
+          - - "arn:aws:s3:::"
+            - ${self:custom.source_bucket}
+            - "/*"
+        - Fn::Join:
+          - ""
+          - - "arn:aws:s3:::"
+            - ${self:custom.destination_bucket}
+            - "/*"
 
-
-plugins:
-  - serverless-webpack
 
 # you can overwrite defaults here
 #  stage: dev
@@ -54,14 +93,6 @@ plugins:
 #  environment:
 #    variable1: value1
 
-# you can add packaging information here
-#package:
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
 
 functions:
   ffmpeg:
@@ -70,8 +101,9 @@ functions:
       - s3:
           bucket: ${self:custom.source_bucket} # This will create the source bucket
           event: s3:ObjectCreated:*
-          # rules:
-          #   - suffix: "*"
+      - s3:
+          bucket: ${self:custom.source_bucket} # This will create the source bucket
+          event: s3:ObjectRemoved:*
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
