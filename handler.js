@@ -1,6 +1,6 @@
 import { getFileInformation, download, upload, deleteObject } from './src/s3'
 import { getDestinationBucket } from './src/env'
-import { ffprobe } from './src/ffmpeg'
+import { ffprobe, ffmpeg } from './src/ffmpeg'
 import { createReadStream } from 'fs'
 
 export const main = async (event, context, callback) => {
@@ -10,9 +10,14 @@ export const main = async (event, context, callback) => {
 
   try {
     const destPath = await download(bucket, key)
-    console.log(`destpath is: ${destPath}`)
-    const result = await ffprobe(destPath)
-    console.log(result)
+    await ffprobe(destPath)
+    const outputPath = await ffmpeg(destPath, 'm3u', [
+      '-b:a', '64k',
+      '-f', 'hls',
+      '-hls_time', '10.0',
+      '-hls_list_size', '0'
+    ])
+
   } catch (error) {
     callback(error)
   }

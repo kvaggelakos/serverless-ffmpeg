@@ -21,12 +21,13 @@
     "create-stack": "sls deploy -v",
     "logs": "sls logs -f ffmpeg -t",
     "destroy-stack": "sls remove -v",
-    "test": "ava test/**/*.js"
+    "test": "ava test/**/*.js",
+    "test-watch": "npm run test -- --watch"
   },
   "ava": {
-		"require": "babel-register",
-		"babel": "inherit"
-	},
+    "require": "babel-register",
+    "babel": "inherit"
+  },
   "author": "Kostas Vaggelakos <kostas@vaggelakos.com>",
   "license": "ISC"
 }

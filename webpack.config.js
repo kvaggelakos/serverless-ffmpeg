@@ -1,5 +1,6 @@
 const slsw = require('serverless-webpack')
 const WebpackPluginCopy = require('webpack-plugin-copy')
+const fs = require('fs')
 
 module.exports = {
   entry: slsw.lib.entries,
@@ -17,8 +18,8 @@ module.exports = {
   },
   plugins: [
     new WebpackPluginCopy([
-      { from: './binaries/ffmpeg/ffmpeg' },
-      { from: './binaries/ffmpeg/ffprobe' }
+      { from: './binaries/ffmpeg/ffmpeg', copyPermissions: true },
+      { from: './binaries/ffmpeg/ffprobe', copyPermissions: true }
     ])
   ]
 };
