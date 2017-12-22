@@ -16,6 +16,7 @@ service: ffmpeg-serverless
 custom:
   source_bucket: speechkit-ffmpeg-sources
   destination_bucket: speechkit-ffmpeg-destination
+  ffmpeg_params: "-b:a 64k -f hls -hls_time 10.0 -hls_list_size 0"
   remover:
      buckets:
        - ${self:custom.source_bucket}
@@ -36,6 +37,7 @@ provider:
   timeout: 300
   environment:
     DESTINATION_BUCKET: ${self:custom.destination_bucket}
+    FFMPEG_PARAMS: ${self:custom.ffmpeg_params}
   iamRoleStatements:
     # List buckets
     - Effect: Allow

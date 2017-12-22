@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk'
-import { createWriteStream } from 'fs'
-import { join } from 'path'
+import { createWriteStream, createReadStream, readdirSync } from 'fs'
+import { join, basename } from 'path'
 import {tmpdir} from 'os'
 
 const s3 = new AWS.S3()
@@ -9,7 +9,7 @@ export function download(Bucket, Key) {
   console.log(`Downloading file: ${Key} from bucket: ${Bucket}`)
 
   return new Promise((resolve, reject) => {
-    const destPath = join(tmpdir(), Key)
+    const destPath = join(tmpdir(), basename(Key))
     const file = createWriteStream(destPath)
     file.on('close', () => resolve(destPath))
     file.on('error', reject)
@@ -27,6 +27,17 @@ export function upload(Bucket, Key, Body, ContentEncoding, ContentType) {
   }).on('httpUploadProgress', ({loaded, total}) => {
     console.log(`Uploading ${Key} to ${Bucket}: (${Math.round(100 * loaded / total)}%) ${loaded} / ${total}`)
   }).promise()
+}
+
+export function uploadFolder(bucket, key, folder, contentEncoding, contentType) {
+  return new Promise((resolve, reject) => {
+    const files = readdirSync(folder)
+    Promise.all(
+      files.map((file) => {
+        return upload(bucket, `${key}/${file}`, createReadStream(join(folder, file), contentEncoding, contentType))
+      })
+    ).then(resolve).catch(reject)
+  })
 }
 
 export function deleteObject(Bucket, Key) {

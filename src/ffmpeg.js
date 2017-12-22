@@ -26,15 +26,19 @@ export function ffprobe(file) {
 
 			const result = JSON.parse(stdout)
 
+			if (!results.streams) {
+				return reject('This file has no streams')
+			}
+
 			const isValidFile = result.streams.some(({codec_type, duration}) =>
 				(codec_type === 'video' || codec_type === 'audio')
 			)
 
 			if (!isValidFile) {
-				reject('FFprobe: no valid media stream found')
+				return reject('FFprobe: no valid media stream found')
       } else {
         console.log('Valid file found. FFProbe finished')
-				resolve(result)
+				return resolve(result)
 			}
     }
 
@@ -47,7 +51,7 @@ export function ffmpeg(file, extension, ffmpegArgs) {
 	return new Promise((resolve, reject) => {
 
     // Create output dir
-    const outputDirectory = join(tmpdir(), 'ffmpeg-output')
+    const outputDirectory = join(tmpdir(), `ffmpeg-output-${Math.random().toString(36).substring(7)}`)
     if (!existsSync(outputDirectory)) {
       mkdirSync(outputDirectory)
     }
