@@ -1,0 +1,11 @@
+# An example configuration
+
+region: us-east-1
+memorySize: 1024
+
+# Both these buckets will be created
+source_bucket: ffmpeg-input
+destination_bucket: ffmpeg-output
+
+# This will transcode audio into hls format
+ffmpeg_params: "-b:a 64k -f hls -hls_time 10.0 -hls_list_size 0"

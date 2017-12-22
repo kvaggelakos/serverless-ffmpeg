@@ -1,5 +1,5 @@
 {
-  "name": "ffmpeg-serverless",
+  "name": "serverless-ffmpeg",
   "version": "1.0.0",
   "description": "Run ffmpeg serverless!",
   "dependencies": {
@@ -16,11 +16,10 @@
     "webpack-plugin-copy": "^1.0.1"
   },
   "scripts": {
-    "offline": "sls offline start",
     "deploy": "serverless deploy function -f ffmpeg",
-    "create-stack": "sls deploy -v",
+    "stack-create": "sls deploy -v",
+    "stack-destroy": "sls remove -v",
     "logs": "sls logs -f ffmpeg -t",
-    "destroy-stack": "sls remove -v",
     "test": "ava test/**/*.js",
     "test-watch": "npm run test -- --watch"
   },
@@ -29,5 +28,5 @@
     "babel": "inherit"
   },
   "author": "Kostas Vaggelakos <kostas@vaggelakos.com>",
-  "license": "ISC"
+  "license": "MIT"
 }
