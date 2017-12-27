@@ -39,6 +39,15 @@ In order to run create the stack in AWS run:
 npm run stack-create
 ```
 
+## Tear down
+
+To clean up run:
+
+```
+npm run stack-destroy
+```
+
+
 ## Built With
 
 * [Serverless](https://github.com/serverless/serverless) - The Serverless Framework
