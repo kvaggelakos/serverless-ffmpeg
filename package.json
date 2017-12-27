@@ -25,6 +25,21 @@
     "test-watch": "npm run test -- --watch",
     "test-ci": "npm run test -- --verbose"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kvaggelakos/serverless-ffmpeg.git"
+  },
+  "keywords": [
+    "serverless",
+    "ffmpeg",
+    "aws",
+    "lambda",
+    "cloud function",
+    "serverless-framework"
+  ],
+  "bugs": {
+    "url": "https://github.com/kvaggelakos/serverless-ffmpeg/issues"
+  },
   "ava": {
     "require": "babel-register",
     "babel": "inherit"
