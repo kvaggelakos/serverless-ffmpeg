@@ -1,5 +1,7 @@
 # ⚡ serverless-ffmpeg
 
+[![Build Status](https://travis-ci.org/kvaggelakos/serverless-ffmpeg.svg?branch=master)](https://travis-ci.org/kvaggelakos/serverless-ffmpeg)
+
 Bucket event driven FFMPEG built with cloud functions
 
 `input bucket => ffmpeg in cloud functions => output bucket`
