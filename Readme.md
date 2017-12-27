@@ -4,6 +4,9 @@ Bucket event driven FFMPEG built with cloud functions
 
 `input bucket => ffmpeg in cloud functions => output bucket`
 
+[![asciicast](https://asciinema.org/a/154418.png)](https://asciinema.org/a/154418)
+
+
 ## Getting Started
 
 See deployment for notes on how to deploy to AWS.

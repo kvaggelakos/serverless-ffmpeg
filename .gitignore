@@ -7,5 +7,6 @@ jspm_packages
 .webpack
 
 
-# Mac
+# Personal
 .DS_Store
+demo

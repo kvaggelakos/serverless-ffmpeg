@@ -21,6 +21,7 @@ provider:
   name: aws
   runtime: nodejs6.10
   timeout: 300
+  stage: ${file(./config.yml):stage}
   region: ${file(./config.yml):region}
   memorySize: ${file(./config.yml):memorySize}
   environment:
