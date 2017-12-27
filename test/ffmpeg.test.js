@@ -1,6 +1,6 @@
 import test from 'ava'
 import {resolve, join} from 'path'
-import {existsSync} from 'fs'
+import {existsSync, removeSync} from 'fs-extra'
 
 import {ffprobe, ffmpeg} from '../src/ffmpeg'
 
@@ -21,4 +21,7 @@ test('can run ffmpeg on file', async t => {
   ])
 
   t.true(existsSync(`${outputDirectory}/file1.m3u`))
+
+  // Clean up
+  removeSync(outputDirectory)
 })
