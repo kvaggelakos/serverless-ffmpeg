@@ -21,7 +21,8 @@
     "stack-destroy": "sls remove -v",
     "logs": "sls logs -f ffmpeg -t",
     "test": "ava test/**/*.js",
-    "test-watch": "npm run test -- --watch"
+    "test-watch": "npm run test -- --watch",
+    "test-ci": "npm run test -- --verbose"
   },
   "ava": {
     "require": "babel-register",

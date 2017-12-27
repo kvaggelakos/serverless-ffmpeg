@@ -17,7 +17,7 @@ export function ffprobe(file) {
 			'-i', file
     ]
 
-    const opts = {cwd: dirname(file)}
+    const opts = {}
 
 		const cb = (error, stdout) => {
 			if (error) {
@@ -68,7 +68,7 @@ export function ffmpeg(file, extension, ffmpegArgs) {
 
 		console.log('Running: ffmpeg', args.join(' '))
 
-    const opts = {cwd: dirname(file)}
+    const opts = {}
 
 		const child = spawn('ffmpeg', args, opts)
 			.on('message', msg => console.log(msg))

@@ -1,0 +1,11 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker pull node:6.12-alpine
+
+script:
+  - docker run --rm --workdir /app -v $PWD:/app node:6.12-alpine sh -c "export PATH=$PATH:./binaries/ffmpeg && npm run test-ci"
+
