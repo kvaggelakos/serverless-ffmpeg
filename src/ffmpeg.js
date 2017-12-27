@@ -26,7 +26,7 @@ export function ffprobe(file) {
 
 			const result = JSON.parse(stdout)
 
-			if (!results.streams) {
+			if (!result.streams) {
 				return reject('This file has no streams')
 			}
 
