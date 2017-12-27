@@ -43,6 +43,8 @@ npm run stack-create
 
 To clean up run:
 
+⚠️ !This will remove all contents of your buckets as well! ⚠️
+
 ```
 npm run stack-destroy
 ```
