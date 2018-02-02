@@ -4,7 +4,9 @@
 
 Bucket event driven FFMPEG built with cloud functions
 
-`input bucket => ffmpeg in cloud functions => output bucket`
+[![architecture](./architecture.png)](./architecture.png)
+
+## A demo of deploying and using
 
 [![asciicast](https://asciinema.org/a/154418.png)](https://asciinema.org/a/154418)
 
